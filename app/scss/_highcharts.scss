@@ -65,6 +65,7 @@
   .highcharts-axis-line {
     fill: none;
     stroke: $slate-secondary-6;
+    stroke-width: 0;
   }
   
   .highcharts-yaxis .highcharts-axis-line {
@@ -265,7 +266,11 @@
   }
   
   .highcharts-point {
-    stroke-width: 0;
+    stroke-width: 1;
+    stroke: white;
+    &:last-child {
+      fill: $green-secondary-2;
+    }
   }
   
   .highcharts-dense-data .highcharts-point {
@@ -275,6 +280,9 @@
   .highcharts-data-label {
     font-size: 0.9em;
     font-weight: bold;
+    @include x-small {
+      font-size: 0.7em;
+    }  
   }
   
   .highcharts-data-label-box {

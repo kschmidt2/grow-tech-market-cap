@@ -12,13 +12,13 @@ Highcharts.setOptions({
     }
 });
 
-let chartId = document.getElementById("chart-container");
+let chartIdTechMarketCap = document.getElementById("chart-container-tech-market-cap");
 
 // checks for the chart ID and displays a backup image if the browser can't find it
 setTimeout(function() {
-    if(chartId.innerHTML === "") {
+    if(chartIdTechMarketCap.innerHTML === "") {
         // console.log('noId');
-        let chartArea = document.getElementsByClassName("chart-area");
+        let chartArea = document.getElementsByClassName("chart-area-tech-market-cap");
         for(var i = 0; i < chartArea.length; i++) {
             chartArea[i].style.display = "none";
         } 
@@ -30,25 +30,66 @@ setTimeout(function() {
 },500);
 
 function drawHighcharts() {
-    Highcharts.chart(chartId, {
+    Highcharts.chart(chartIdTechMarketCap, {
         chart: {
-            type: 'bar',
+            type: 'treemap',
             styledMode: true,
             spacingBottom: 25,
             spacingRight: 100,
             spacingLeft: 0,
-            spacingTop: 20
         }, 
+        series: [{
+            layoutAlgorithm: 'squarified',
+            layoutStartingDirection: 'horizontal',
+            dataLabels: {
+                align: 'center',
+                allowOverlap: true,
+                crop: false,
+                overflow: 'justify',
+            },
+            data: [{
+                name: 'Microsoft:<br>$1.37T',
+                color: '#74c947',
+                value: 1374000000000,
+                sortIndex: 1,
+            },{
+                name: 'Apple:<br>$1.34T',
+                color: '#74c947',
+                value: 1342000000000,
+                sortIndex: 2
+            },{
+                name: 'Amazon:<br>$1.17T',
+                color: '#74c947',
+                value: 1173000000000,
+                sortIndex: 3
+            },{
+                name: 'Alphabet:<br>$933.82B',
+                color: '#74c947',
+                value: 933820000000,
+                sortIndex: 4,
+            },{
+                name: 'Facebook:<br>$595.46B',
+                color: '#74c947',
+                value: 595460000000,
+                sortIndex: 5,
+                dataLabels: {
+                    // rotation: 90
+                }
+            },{
+                name: 'Other 495 companies:<br>$18.6T',
+                color: '#cccfcf',
+                value: 18595660000000,
+                sortIndex: 6
+            },{
+            }]
+        }],
         title: {
             text: null
-        },
-        data: {
-            googleSpreadsheetKey: '1YOKb5l2VM4aAB2r20N_1aT_1vEajYrP3U-U3A6lZbC0'
         },
         // for bar charts only
         plotOptions: {
             series: {
-                groupPadding: 0.1
+                enableMouseTracking: false,
             } 
         },
         // for line charts only
@@ -103,8 +144,7 @@ function drawHighcharts() {
             enabled: false
         },
         tooltip: {
-            shadow: false,
-            padding: 10
+            enabled: false
         },
         responsive: {
             rules: [{
@@ -119,9 +159,6 @@ function drawHighcharts() {
                     align: 'left',
                     x: -18
                 },
-                tooltip: {
-                    enabled: false
-                }
             }
             }]
         }
